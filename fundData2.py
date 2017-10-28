@@ -86,19 +86,21 @@ and then push data directly into pandas DataFrame. This will avoid occupying too
 system stack memory size, which leading to a slow down in system process speed.'''
 
     for urlList in urlListTotal:
+		
         for url in urlList:
             counter += 1
             try:
-                initFundCount = len(fundList)
-
                 response = session.get(url = url, timeout = 5)
                 soup = bs4.BeautifulSoup(response.content, 'lxml', from_encoding='utf-8')
 
+				entryCount = 0
                 table = soup.find_all('tr')
                 for row in table:
+					
                     entries = row.find_all('td')
                     #print(len(entries))
                     if len(entries) != 0:
+						entryCount += 1
                         fund = PEFund(int(entries[0].string))
                         fund.fund_short_name = str(entries[1].string)
                         fund.strategy = str(entries[2].string)
@@ -113,10 +115,8 @@ system stack memory size, which leading to a slow down in system process speed.'
                         fund.fundStandardize()
                         fundList.append(fund)
 
-                endFundCount = len(fundList)
-
                 print("Page " + str(counter) + " completed.")
-                print("%d funds added!" % (endFundCount-initFundCount))
+                print("%d funds added!" % (entryCount))
 
             except:
                 print("Error: cannot fetch data with pagecount " + str(counter))
