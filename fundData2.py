@@ -94,6 +94,7 @@ system stack memory size, which leading to a slow down in system process speed.'
                 soup = bs4.BeautifulSoup(response.content, 'lxml', from_encoding='utf-8')
 
 				entryCount = 0
+		
                 table = soup.find_all('tr')
                 for row in table:
 					
@@ -101,6 +102,7 @@ system stack memory size, which leading to a slow down in system process speed.'
                     #print(len(entries))
                     if len(entries) != 0:
 						entryCount += 1
+			
                         fund = PEFund(int(entries[0].string))
                         fund.fund_short_name = str(entries[1].string)
                         fund.strategy = str(entries[2].string)
@@ -156,6 +158,9 @@ system stack memory size, which leading to a slow down in system process speed.'
                             }
             #print('fundDescribe',fundDescribe)
             rawData = rawData.append(fundDescribe, ignore_index = True)
+			
+		newList = []
+		fundList = newList
 
         #print('rawdata',rawData)
 
