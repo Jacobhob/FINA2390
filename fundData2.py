@@ -81,6 +81,10 @@ if __name__ == "__main__":
     # Store funds information in fundList.
     fundList = []
 
+'''Could have avoided storing data in list, instead should pour html text into json file,
+and then push data directly into pandas DataFrame. This will avoid occupying too much 
+system stack memory size, which leading to a slow down in system process speed.'''
+
     for urlList in urlListTotal:
         for url in urlList:
             counter += 1
