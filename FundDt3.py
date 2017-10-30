@@ -46,6 +46,8 @@ for i in range(0,100,50):
         response = urllib.request.urlopen(request)
         #print(response.read())    
         fund = json.loads(response.read())
+		with open("out3.json", "a") as f:
+            json.dump(fund, f)
     except:
         print('cannot get data offset' + str(i))
 #    print(fund.values())
